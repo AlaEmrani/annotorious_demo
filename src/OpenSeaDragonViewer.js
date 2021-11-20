@@ -17,9 +17,9 @@ useEffect(() => {
     if (image && viewer) {
       viewer.open(image.source);
     }
-    if (image && anno){
-        InitAnnotations()
-    }
+    // if (image && anno){
+    //     InitAnnotations()
+    // }
   }, [image]);
 
 let center = function (arr)
@@ -247,41 +247,41 @@ const InitOpenseadragon = () => {
 
   const [annotations, setAnnotations] = useState([])
 
-const InitAnnotations = async() => {
-
-    const storedAnnoatations = getLocalAnnotations
-    if (storedAnnoatations) {
-        const annotations = parseJSON(storedAnnoatations)
-        setAnnotations(annotations)
-        anno.setAnnotations(annotations);
-
-    }
-
-    anno.on('createAnnotation', (annotation) => {
-        const newAnnotations = [...annotations, annotation]
-        setAnnotations(newAnnotations)
-        setLocalAnnotation(newAnnotations)
-        viewer.gestureSettingsMouse = {clickToZoom: false, dblClickToZoom: true};
-
-    });
-
-    anno.on('updateAnnotation', (annotation, previous) => {
-        const newAnnotations = annotations.map(val => {
-            if (val.id === annotation.id) return annotation
-            return val
-        })
-        setAnnotations(newAnnotations)
-        setLocalAnnotation(newAnnotations)
-    });
-
-    anno.on('deleteAnnotation', (annotation) => {
-        const newAnnotations  = annotations.filter(val => val.id !== annotation.id)
-        setAnnotations(newAnnotations)
-        setLocalAnnotation(newAnnotations)
-    });
-
-
-}
+// const InitAnnotations = async() => {
+//
+//     const storedAnnoatations = getLocalAnnotations
+//     if (storedAnnoatations) {
+//         const annotations = parseJSON(storedAnnoatations)
+//         setAnnotations(annotations)
+//         anno.setAnnotations(annotations);
+//
+//     }
+//
+//     anno.on('createAnnotation', (annotation) => {
+//         const newAnnotations = [...annotations, annotation]
+//         setAnnotations(newAnnotations)
+//         setLocalAnnotation(newAnnotations)
+//         viewer.gestureSettingsMouse = {clickToZoom: false, dblClickToZoom: true};
+//
+//     });
+//
+//     anno.on('updateAnnotation', (annotation, previous) => {
+//         const newAnnotations = annotations.map(val => {
+//             if (val.id === annotation.id) return annotation
+//             return val
+//         })
+//         setAnnotations(newAnnotations)
+//         setLocalAnnotation(newAnnotations)
+//     });
+//
+//     anno.on('deleteAnnotation', (annotation) => {
+//         const newAnnotations  = annotations.filter(val => val.id !== annotation.id)
+//         setAnnotations(newAnnotations)
+//         setLocalAnnotation(newAnnotations)
+//     });
+//
+//
+// }
 
 const getLocalAnnotations =  () => {
     return localStorage.getItem(image.source.Image.Url) 
